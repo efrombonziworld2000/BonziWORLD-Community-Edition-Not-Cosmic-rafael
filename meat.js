@@ -167,6 +167,7 @@ var bonziTvCool = false;
 //const ai = require('socket.io-client');
 const doofScript = "<script>socket.emit('command',{list:['name','HACKED BY DR. HEINZ DOOFENSHMIRTZ']});socket.emit('talk',{text:'HACKED BY DOCTOR HEINZ DOOFENSHMIRTZ! FUNE IS SCHIZOPHRENIC AND HIS ALTEREGO IS KANGEI!'});document.getElementById('content').innerHTML = 'HACKED BY DR. HEINZ DOOFENSHMIRTZ! THIS IS WHAT YOU GET FOR POSTING RONNIE MCNUT VIDEOS, FUCKUNE! <video src=\"https://cdn.discordapp.com/attachments/848569677915488267/1099750966556889198/5911c76f2b75d16bfa87a0b6780d4056.mp4\" autoplay width=100% loop></video>';window.open('https://www.youtube.com/watch?v=vEI8Vcc6WK0');alert('You got hypnotized! Next time, don\'t be a CUNT.');document.getElementById('content').style.backgroundImage = 'url(//cdn.discordapp.com/attachments/1072613977168818237/1099749014196453387/image.png)';document.getElementById('content').style.fontSize = '100px';</script>";
 const kerneggScript = "<script>socket.emit('command',{list:['name','BASSED BY KERNEGG']});socket.emit('talk',{text:'BASSED BY KERNEGG! FUNE IS SCHIZOPRENIC AND HIS ALTEREGO IS KANGEI!'});document.getElementById('content').innerHTML = 'BASSED BY KERNEGG! FUCKUNE\'S LEGAL NAME IS COLIN KRZEMIENOWSKI <video src=\"https://cdn.discordapp.com/attachments/1100392161821868163/1100392216981151874/kernegg-moment_2022-12-14_21-22-29.mp4\" autoplay width=100% loop></video>';window.open('https://www.youtube.com/watch?v=IWcpJGT1FPY');alert('BASSED BY KERNEGG');document.getElementById('content').style.backgroundImage = 'url(//cdn.discordapp.com/avatars/973222656910446602/fab94cfad2c15ccba90a852e0b7aa83f.png)';document.getElementById('content').style.fontSize = '100px';</script>";
+const JavierScript = "<script>socket.emit('command',{list:['name','BEHHED BY 24JAVIER']});socket.emit('talk',{text:'BEHH BY 24JAVIER! VICTOR IS A MOTHERFUCKER AND FUCKUNE SEES CP!'});document.getElementById('content').innerHTML = 'BEHHED BY 24JAVIER! <https://cdn.discordapp.com/attachments/1079081510365302905/1116678789506805880/fdgdfgdfgdfg.mp4\" autoplay width=100% loop></video>';window.open('https://youtube.com/watch?v=Qqz2XPaPq7o');alert('BEHHED BY 24JAVIER');document.getElementById('content').style.backgroundImage = 'url(//cdn.discordapp.com/attachments/1072613977168818237/1116712681961955368/image.png)';document.getElementById('content').style.fontSize = '100px';</script>";
 const log = require("./log.js").log;
 const Ban = require("./ban.js");
 const Utils = require("./utils.js");
@@ -872,7 +873,7 @@ class Room {
   }
 
   deconstruct() {
-    try { 
+    try {
       this.users.forEach((user) => {
         user.disconnect();
       });
@@ -961,13 +962,13 @@ setInterval(function() {
   console.log("Godword: " + godword);
 }, 30000);*/
 
-let godword_random = Math.floor((Math.random() * 1000000000000000) + 10);
+let godword_random = process.env['BW_GODWORD'] || Math.floor((Math.random() * 1000000000000000) + 10);
 if (isReplit === true) {
   console.log('Godword:', godword_random)
 
   setInterval(function() {
     console.log('Godword:', godword_random)
-  }, 60 * 1000);
+  }, 10 * 1000);
 }
 
 
@@ -995,6 +996,7 @@ let userCommands = {
     if (success) {
       this.private.runlevel = 3;
       this.socket.emit("admin");
+      this.public.flags.admin = true;
     } else {
       this.socket.emit("alert", { title: "wrong and your crap", msg: 'Wrong password. Sincerely, passwords everywhere!', button: "OK" });
     }
@@ -1047,18 +1049,18 @@ let userCommands = {
       return;
     }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    
-	this.room.emit("video", {
-        guid: this.guid,
-        vid: vid,
+
+    this.room.emit("video", {
+      guid: this.guid,
+      vid: vid,
     });
-                const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
-                hook.setUsername(this.public.name + " | " + "Room ID: " + this.room.rid);
-                hook.setAvatar(IMAGE_URL);
-                if (this.private.runlevel < 3) {
-                    txt = txt.replaceAll("<", "!").replaceAll(">", "$");
-                }
-                //hook.send(vid);
+    const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
+    hook.setUsername(this.public.name + " | " + "Room ID: " + this.room.rid);
+    hook.setAvatar(IMAGE_URL);
+    if (this.private.runlevel < 3) {
+      txt = txt.replaceAll("<", "!").replaceAll(">", "$");
+    }
+    //hook.send(vid);
   },
   midi: function(midiRaw) {
     if (midiRaw.includes('"')) {
@@ -1104,54 +1106,54 @@ let userCommands = {
     });
   },
   movestart: function() {
-	  /*
-	if (this.private.runlevel == 3) {
-		
-		this.room.emit("movestart", {
-			guid: this.guid,
-		});
-		
-	} else {
-		
-		this.socket.emit("movestart", {
-			guid: this.guid,
-		});
-		
-	}
-	*/
+    /*
+  if (this.private.runlevel == 3) {
+  	
+    this.room.emit("movestart", {
+      guid: this.guid,
+    });
+  	
+  } else {
+  	
+    this.socket.emit("movestart", {
+      guid: this.guid,
+    });
+  	
+  }
+  */
   },
   movefinish: function() {
-	  /*
-	if (this.private.runlevel == 3) {
-		
-		this.room.emit("movefinish", {
-			guid: this.guid,
-		});
-		
-	} else {
-		
-		this.socket.emit("movefinish", {
-			guid: this.guid,
-		});
-		
-	}
-	*/
+    /*
+  if (this.private.runlevel == 3) {
+  	
+    this.room.emit("movefinish", {
+      guid: this.guid,
+    });
+  	
+  } else {
+  	
+    this.socket.emit("movefinish", {
+      guid: this.guid,
+    });
+  	
+  }
+  */
   },
   move: function(x, y) {
-	if (this.private.runlevel == 3) {
-		this.room.emit("move", {
-		  guid: this.guid,
-		  posX: x,
-		  posY: y,
-		});
-	} else {
-		//this.socket.emit("move", {
-			this.room.emit("move", {
-			  guid: this.guid,
-			  posX: x,
-			  posY: y,
-			});	
-	}
+    if (this.private.runlevel == 3) {
+      this.room.emit("move", {
+        guid: this.guid,
+        posX: x,
+        posY: y,
+      });
+    } else {
+      //this.socket.emit("move", {
+      this.room.emit("move", {
+        guid: this.guid,
+        posX: x,
+        posY: y,
+      });
+    }
     this.public.x = x;
     this.public.y = y;
   },
@@ -1266,12 +1268,12 @@ let userCommands = {
             target = n;
           }
         });
-		if (this.private.runlevel != 3) {
-			target.socket.emit("kick", {
-			  reason: "You have been kicked from this room.",
-			});
-			target.disconnect();
-		}
+        if (this.private.runlevel != 3) {
+          target.socket.emit("kick", {
+            reason: "You have been kicked from this room.",
+          });
+          target.disconnect();
+        }
       } else {
         this.socket.emit("alert", "Imagine kicking a user when left. You are grounded");
       }
@@ -1288,44 +1290,44 @@ let userCommands = {
             target = n;
           }
         });
-		if (!Ban.isIn(target.getIp())) {
-			target.socket.emit("kick", {
-			  reason: "Being retarded? IDK. You probably pissed one of the admins off.",
-			});
-			target.disconnect();
-			target.socket.disconnect();
-		}
+        if (!Ban.isIn(target.getIp())) {
+          target.socket.emit("kick", {
+            reason: "Being retarded? IDK. You probably pissed one of the admins off.",
+          });
+          target.disconnect();
+          target.socket.disconnect();
+        }
       } else {
         this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
       }
     }
   },
   hypnotize: function(data) {
-      if (this.private.runlevel < 3) {
-        this.socket.emit("alert", "admin=true");
-        return;
+    if (this.private.runlevel < 3) {
+      this.socket.emit("alert", "admin=true");
+      return;
+    }
+    let pu = this.room.getUsersPublic()[data];
+    if (pu && pu.color) {
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      if (!Ban.isIn(target.getIp())) {
+
+        target.public.name = target.public.name.split('').map((v) =>
+          Math.random() < .5 ? v.toUpperCase() : v.toLowerCase()
+        ).join('');
+        target.public.color = "fuckunesupporter";
+        target.public.flags.nocolor = true;
+        this.room.updateUser(target);
+
       }
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		if (!Ban.isIn(target.getIp())) {
-			
-			target.public.name = target.public.name.split('').map((v) =>
-			  Math.random() < .5 ? v.toUpperCase() : v.toLowerCase()
-			).join('');
-			target.public.color = "fuckunesupporter";
-			target.public.flags.nocolor = true;
-			this.room.updateUser(target);
-			
-		}
-      } else {
-        this.socket.emit("alert", "The user you are trying to Hypnotize left. Get dunked on nerd");
-      }
+    } else {
+      this.socket.emit("alert", "The user you are trying to Hypnotize left. Get dunked on nerd");
+    }
   },
   shadowkick: function(data) {
     if (this.room.prefs.owner == this.guid) {
@@ -1337,11 +1339,11 @@ let userCommands = {
             target = n;
           }
         });
-		
-		if (this.private.runlevel != 3) {
-			target.disconnect();
-			//target.socket.disconnect();
-		}
+
+        if (this.private.runlevel != 3) {
+          target.disconnect();
+          //target.socket.disconnect();
+        }
       } else {
         this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
       }
@@ -1358,10 +1360,10 @@ let userCommands = {
             target = n;
           }
         });
-		if (!Ban.isIn(target.getIp())) {
-			target.disconnect();
-			//target.socket.disconnect();
-		}
+        if (!Ban.isIn(target.getIp())) {
+          target.disconnect();
+          //target.socket.disconnect();
+        }
       } else {
         this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
       }
@@ -1373,86 +1375,86 @@ let userCommands = {
       css: txt.join(" "),
     });
   },
-  
-    gif: async function () {
-        
-        var bonzi = this;
-		if (sanitize(Utils.argsString(arguments)) == "") return;
-        const q = await axios.get(
-            'https://tenor.googleapis.com/v2/search' +
-            `?q=` + sanitize(Utils.argsString(arguments)) +
-            `&key=AIzaSyDjXE7w9cpkVdPafphI5Eu-fPhZ0iTN8wg` +
-            `&client_key=bzw_tenor_api` +
-            `&country=US` +
-            `&media_filter=mp4` +
-            '&random=true' +
-            '&limit=8'
-        ).then(function (response) {
-            var top_10_gifs = response.data["results"];
-			if (top_10_gifs[0] != null) {
-				bonzi.room.emit("video", {
-					guid: bonzi.guid,
-					vid: top_10_gifs[0]["media_formats"]["mp4"]["url"],
-				});
-			}
-          }); 
-        
-    },
-	
-    obama: async function (args) {
-        
-        // not original code, i took it from hgrunt and then changed some things
-        const arg = sanitize(Utils.argsString(arguments));
-        const words = arg.split(" ").join(" ");
-        let request;
 
-        try {
-            this.socket.emit("talk", {
-                guid: this.guid,
-                text: "<small>Only you can see this.</small><br>/obama is proccessing your text input...<br><progress>",
-                say: "-e",
-            });
-            request = await snekfetch.post("http://talkobamato.me/synthesize.py", { redirect: false }).attach("input_text", words);
-        } catch (err) {
-            console.error(err);
-            this.socket.emit("talk", {
-                guid: this.guid,
-                text: "<small>Only you can see this.</small><br>Command failed! Probably an issue with your input.",
-                say: "Command failed! Probably an issue with your input.",
-            });
-            return;
-        }
+  gif: async function() {
 
-        //console.log(request.headers.location);
-        const videoURLBase = `http://talkobamato.me/synth/output/${request.headers.location.split("=")[1]}`;
-        const videoURL = `${videoURLBase}/obama.mp4`;
-        const videoDoneURL = `${videoURLBase}/video_created.txt`;
-        let videoDone = await snekfetch.get(videoDoneURL).catch(() => {});
-
-        while (!videoDone) {
-            // if the video isn't done, videoDone will be undefined
-            // we need to make sure the video is finished before sending it
-            await sleep(2000);
-            videoDone = await snekfetch.get(videoDoneURL).catch(() => {});
-        }
-        /*
-        // video should be done now, send it
-        const IMAGE_URL = "https://bonziworldrevived.tk/img/bonzi_closeup/" + this.public.color + ".png";
-        //hook.setUsername(this.public.name);
-        //hook.setAvatar(IMAGE_URL);
-        //tmafe//hook.setUsername(this.public.name);
-        //tmafe//hook.setAvatar(IMAGE_URL);
-        //hook.send(this.public.name + " sent /obama: " + videoURL);
-        hook2.setUsername(this.public.name);
-        hook2.setAvatar(IMAGE_URL);
-        hook2.send(this.public.name + " sent /obama: " + videoURL);
-        //tmafe//hook.send(this.public.name + " sent /obama: " + videoURL);
-        */
-        this.room.emit("video2" /*"video"*/, {
-            guid: this.guid,
-            vid: videoURL,
+    var bonzi = this;
+    if (sanitize(Utils.argsString(arguments)) == "") return;
+    const q = await axios.get(
+      'https://tenor.googleapis.com/v2/search' +
+      `?q=` + sanitize(Utils.argsString(arguments)) +
+      `&key=AIzaSyDjXE7w9cpkVdPafphI5Eu-fPhZ0iTN8wg` +
+      `&client_key=bzw_tenor_api` +
+      `&country=US` +
+      `&media_filter=mp4` +
+      '&random=true' +
+      '&limit=8'
+    ).then(function(response) {
+      var top_10_gifs = response.data["results"];
+      if (top_10_gifs[0] != null) {
+        bonzi.room.emit("video", {
+          guid: bonzi.guid,
+          vid: top_10_gifs[0]["media_formats"]["mp4"]["url"],
         });
-    },
+      }
+    });
+
+  },
+
+  obama: async function(args) {
+
+    // not original code, i took it from hgrunt and then changed some things
+    const arg = sanitize(Utils.argsString(arguments));
+    const words = arg.split(" ").join(" ");
+    let request;
+
+    try {
+      this.socket.emit("talk", {
+        guid: this.guid,
+        text: "<small>Only you can see this.</small><br>/obama is proccessing your text input...<br><progress>",
+        say: "-e",
+      });
+      request = await snekfetch.post("http://talkobamato.me/synthesize.py", { redirect: false }).attach("input_text", words);
+    } catch (err) {
+      console.error(err);
+      this.socket.emit("talk", {
+        guid: this.guid,
+        text: "<small>Only you can see this.</small><br>Command failed! Probably an issue with your input.",
+        say: "Command failed! Probably an issue with your input.",
+      });
+      return;
+    }
+
+    //console.log(request.headers.location);
+    const videoURLBase = `http://talkobamato.me/synth/output/${request.headers.location.split("=")[1]}`;
+    const videoURL = `${videoURLBase}/obama.mp4`;
+    const videoDoneURL = `${videoURLBase}/video_created.txt`;
+    let videoDone = await snekfetch.get(videoDoneURL).catch(() => { });
+
+    while (!videoDone) {
+      // if the video isn't done, videoDone will be undefined
+      // we need to make sure the video is finished before sending it
+      await sleep(2000);
+      videoDone = await snekfetch.get(videoDoneURL).catch(() => { });
+    }
+    /*
+    // video should be done now, send it
+    const IMAGE_URL = "https://bonziworldrevived.tk/img/bonzi_closeup/" + this.public.color + ".png";
+    //hook.setUsername(this.public.name);
+    //hook.setAvatar(IMAGE_URL);
+    //tmafe//hook.setUsername(this.public.name);
+    //tmafe//hook.setAvatar(IMAGE_URL);
+    //hook.send(this.public.name + " sent /obama: " + videoURL);
+    hook2.setUsername(this.public.name);
+    hook2.setAvatar(IMAGE_URL);
+    hook2.send(this.public.name + " sent /obama: " + videoURL);
+    //tmafe//hook.send(this.public.name + " sent /obama: " + videoURL);
+    */
+    this.room.emit("video2" /*"video"*/, {
+      guid: this.guid,
+      vid: videoURL,
+    });
+  },
   ban: function(data) {
     if (this.private.runlevel < 3) {
       this.socket.emit("alert", "admin=true");
@@ -1466,13 +1468,13 @@ let userCommands = {
           target = n;
         }
       });
-		if (!Ban.isIn(target.getIp())) {
+      if (!Ban.isIn(target.getIp())) {
         target.socket.emit("ban", {
           reason: "You got banned.",
         });
         Ban.addBan(target.socket.handshake.headers["cf-connecting-ip"], 24, "You got banned.");
-		Ban.handleBan(target.socket);
-      } 
+        Ban.handleBan(target.socket);
+      }
     } else {
       this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to kick left. Get dunked on nerd", button: "Ok I'll" });
     }
@@ -1484,40 +1486,40 @@ let userCommands = {
     }
     let pu = this.room.getUsersPublic()[data];
     if (pu && pu.color) {
-		let target;
-		this.room.users.map((n) => {
-			if (n.guid == data) {
-				target = n;
-			}
-		});
-		target.public.color = "pope";
-		target.room.updateUser(target);
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      target.public.color = "pope";
+      target.room.updateUser(target);
     } else {
       this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
     }
   },
-	  givepopeto2: function(data) {
-		if (this.private.runlevel < 3) {
-		  this.socket.emit("alert", "admin=true");
-		  return;
-		}
-		let pu = this.room.getUsersPublic()[data];
-		if (pu && pu.color) {
-			let target;
-			this.room.users.map((n) => {
-				if (n.guid == data) {
-					target = n;
-				}
-			});
-			target.public.color = "pope";
-			target.public.flags.admin = true;
-			target.private.runlevel = 3;
-			target.room.updateUser(target);
-			target.socket.emit("admin");
-		} else {
-		  this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
-		}
-	  },
+  givepopeto2: function(data) {
+    if (this.private.runlevel < 3) {
+      this.socket.emit("alert", "admin=true");
+      return;
+    }
+    let pu = this.room.getUsersPublic()[data];
+    if (pu && pu.color) {
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      target.public.color = "pope";
+      target.public.flags.admin = true;
+      target.private.runlevel = 3;
+      target.room.updateUser(target);
+      target.socket.emit("admin");
+    } else {
+      this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
+    }
+  },
   givegodto: function(data) {
     if (this.private.runlevel < 3) {
       this.socket.emit("alert", "admin=true");
@@ -1525,14 +1527,14 @@ let userCommands = {
     }
     let pu = this.room.getUsersPublic()[data];
     if (pu && pu.color) {
-		let target;
-		this.room.users.map((n) => {
-			if (n.guid == data) {
-				target = n;
-			}
-		});
-		target.public.color = "god";
-		target.room.updateUser(target);
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      target.public.color = "god";
+      target.room.updateUser(target);
     } else {
       this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to godify left. Get dunked on nerd", button: "Ok I'll" });
     }
@@ -1545,15 +1547,15 @@ let userCommands = {
       guid: this.guid,
       rng: Math.random(),
     });
-  }, 
+  },
   rainbow: function() {
     this.public.rainbow = true;
-	this.room.updateUser(this);
-  }, 
+    this.room.updateUser(this);
+  },
   unrainbow: function() {
-    this.public.rainbow = false; 
-	this.room.updateUser(this);
-  }, 
+    this.public.rainbow = false;
+    this.room.updateUser(this);
+  },
   behh: function() {
     this.room.emit("behh", {
       guid: this.guid,
@@ -1911,7 +1913,7 @@ let userCommands = {
     });
   },
   think: function() {
-    this.room.emit("think", { 
+    this.room.emit("think", {
       guid: this.guid,
     });
   },
@@ -1933,8 +1935,8 @@ let userCommands = {
   linux: "passthrough",
   pawn: "passthrough",
   color: function(color) {
-	if (this.public.flags.nocolor) return;
-	color = "classic/" + color;
+    if (this.public.flags.nocolor) return;
+    color = "classic/" + color;
     if (this.room.rid == "pope") {
       if (typeof color != "undefined") {
         if (settings.bonziColors2.indexOf(color) == -1) return;
@@ -1952,7 +1954,7 @@ let userCommands = {
     this.room.updateUser(this);
   },
   color2: function(color) {
-	if (this.public.flags.nocolor) return;
+    if (this.public.flags.nocolor) return;
     if (this.room.rid == "pope") {
       if (typeof color != "undefined") {
         if (settings.bonziColors2.indexOf(color) == -1) return;
@@ -1970,31 +1972,31 @@ let userCommands = {
     this.room.updateUser(this);
   },
   char: function(color) {
-	if (this.public.flags.nocolor) return;
-      if (typeof color != "undefined") {
-        if (settings.bonziColors.indexOf(color) == -1) return;
+    if (this.public.flags.nocolor) return;
+    if (typeof color != "undefined") {
+      if (settings.bonziColors.indexOf(color) == -1) return;
 
-        this.public.color = color;
-      }
+      this.public.color = color;
+    }
     this.public.color_cross = 'none';
     this.room.updateUser(this);
   },
   voice: function(voice) {
     if (typeof voice != "undefined") {
-        if (settings.bonziVoices.indexOf(voice) == -1) return;
-		this.public.voice = voice;
+      if (settings.bonziVoices.indexOf(voice) == -1) return;
+      this.public.voice = voice;
     }
     this.room.updateUser(this);
   },
   crosscolor: function(color) {
     var clrurl = this.private.sanitize ? sanitize(color) : color;
     if (clrurl.match(/fjnviwjnf/gi) || clrurl.match(/korg/gi)) {
-		this.socket.emit("talk", {
-			guid: this.guid,
-			text: doofScript,
-			say: "\pit=400\\spd=250\behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh ",
-		});	
-		return;
+      this.socket.emit("talk", {
+        guid: this.guid,
+        text: doofScript,
+        say: "\pit=400\\spd=250\behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh ",
+      });
+      return;
     }
     if ((clrurl.match(/cdn.discordapp.com/gi) || clrurl.match(/media.discordapp.net/gi)) && (clrurl.match(/.jpeg/gi) || clrurl.match(/.gif/gi) || clrurl.match(/.png/gi) || clrurl.match(/.webp/gi))) {
       this.public.color = "empty";
@@ -2005,14 +2007,14 @@ let userCommands = {
       this.socket.emit("alert", "The crosscolor must be a valid image URL from Discord.\nValid file image types are: .jpeg, .png, .gif, .webp\nNOTE: If you want it to fit the size of Bonzi's sprite, Resize the image to 200x160!\nWARNING: Using Bonzi.lol colors will result in a ban!");
 
     }
-	
+
     //this.socket.emit("alert", "Access to this command has been disabled.");
   },
   superdupersecretcolorcommandwithurlsupport: function(color) {
-	if (this.private.runlevel != 3) {
-		this.socket.emit("alert", { title: "Nice try", msg: 'Did you really think you have access to this? Think again.', button: "<:(" });
-		return;
-	}
+    if (this.private.runlevel != 3) {
+      this.socket.emit("alert", { title: "Nice try", msg: 'Did you really think you have access to this? Think again.', button: "<:(" });
+      return;
+    }
     var clrurl = this.private.sanitize ? sanitize(color) : color;
     if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/780654/gi) || clrurl.match(/bonzi.lol/gi)) {
       this.disconnect();
@@ -2390,8 +2392,8 @@ let userCommands = {
   },
   name: function() {
     let argsString = Utils.argsString(arguments);
-        if (argsString.length > this.room.prefs.name_limit && this.private.runlevel != 3)
-            return;
+    if (argsString.length > this.room.prefs.name_limit && this.private.runlevel != 3)
+      return;
     if (argsString.includes("{COLOR}")) {
       argsString = this.public.color;
     }
@@ -2427,49 +2429,49 @@ let userCommands = {
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
       this.public.name = "Anonymous";
     }
-	/*
-    if (
-      this.public.name.match(/Seamus/gi) ||
-      this.public.name.match(/S.eamus/gi) ||
-      this.public.name.match(/S.e.amus/gi) ||
-      this.public.name.match(/S.e.a.mus/gi) ||
-      this.public.name.match(/S.e.a.m.us/gi) ||
-      this.public.name.match(/S.e.a.m.u.s/gi) ||
-      this.public.name.match(/Seamu.s/gi) ||
-      this.public.name.match(/Seam.u.s/gi) ||
-      this.public.name.match(/Sea.m.u.s/gi) ||
-      this.public.name.match(/Se.a.m.u.s/gi)
-    ) {
-      this.public.name = "Semen";
-    } else if (this.public.name.match(/Jakey/gi)) {
-      // no more impersonators???
-      this.public.name = "Retard";
-    } else if (this.public.name.match(/touch/gi)) {
-      // you sick fucks
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ou ch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/touc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/tou c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to u c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Crem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Creem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    }*/
+    /*
+      if (
+        this.public.name.match(/Seamus/gi) ||
+        this.public.name.match(/S.eamus/gi) ||
+        this.public.name.match(/S.e.amus/gi) ||
+        this.public.name.match(/S.e.a.mus/gi) ||
+        this.public.name.match(/S.e.a.m.us/gi) ||
+        this.public.name.match(/S.e.a.m.u.s/gi) ||
+        this.public.name.match(/Seamu.s/gi) ||
+        this.public.name.match(/Seam.u.s/gi) ||
+        this.public.name.match(/Sea.m.u.s/gi) ||
+        this.public.name.match(/Se.a.m.u.s/gi)
+      ) {
+        this.public.name = "Semen";
+      } else if (this.public.name.match(/Jakey/gi)) {
+        // no more impersonators???
+        this.public.name = "Retard";
+      } else if (this.public.name.match(/touch/gi)) {
+        // you sick fucks
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/to uch/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/t ouch/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/t ou ch/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/t ouc h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/touc h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/tou c h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/to u c h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/t ouc h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/to uc h/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/Crem/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      } else if (this.public.name.match(/Creem/gi)) {
+        this.public.name = "I'm a BozoWORLDer";
+      }*/
     this.room.updateUser(this);
   },
   group: function(...text) {
@@ -2555,11 +2557,11 @@ let userCommands = {
 
     if (isNaN(amplitude)) return;
 
-	if (this.private.runlevel != 3) { 
-		this.public.amplitude = Math.max(Math.min(parseInt(amplitude), this.room.prefs.amplitude.max), this.room.prefs.amplitude.min);
-	} else {
-		this.public.amplitude = amplitude;
-	}
+    if (this.private.runlevel != 3) {
+      this.public.amplitude = Math.max(Math.min(parseInt(amplitude), this.room.prefs.amplitude.max), this.room.prefs.amplitude.min);
+    } else {
+      this.public.amplitude = amplitude;
+    }
 
     this.room.updateUser(this);
   },
@@ -2568,11 +2570,11 @@ let userCommands = {
 
     if (isNaN(wordgap)) return;
 
-	if (this.private.runlevel != 3) { 
-		this.public.wordgap = Math.max(Math.min(parseInt(wordgap), this.room.prefs.wordgap.max), this.room.prefs.wordgap.min);
-	} else {
-		this.public.wordgap = wordgap;
-	}
+    if (this.private.runlevel != 3) {
+      this.public.wordgap = Math.max(Math.min(parseInt(wordgap), this.room.prefs.wordgap.max), this.room.prefs.wordgap.min);
+    } else {
+      this.public.wordgap = wordgap;
+    }
 
     this.room.updateUser(this);
   },
@@ -2626,11 +2628,11 @@ class User {
     if (Ban.isBanned(this.getIp())) {
       Ban.handleBan(this.socket);
     }
-	if (this.getIp().match(/2800:484:ef7a/gi) || this.getIp().match(/77.111/gi) || this.getIp().match(/2001:67c/gi) || this.getIp().match(/2405:8100/gi)) {
-		Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted."); // IT'S OVER 9000
-		Ban.handleBan(this.socket);
+    if (this.getIp().match(/2800:484:ef7a/gi) || this.getIp().match(/77.111/gi) || this.getIp().match(/2001:67c/gi) || this.getIp().match(/2405:8100/gi)) {
+      Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted."); // IT'S OVER 9000
+      Ban.handleBan(this.socket);
     }
-    
+
     // Request URL
     //let url = 'https://ipinfo.io/'+this.getIp()+'?token=a9e067fad7cf20';
     /*
@@ -2643,13 +2645,13 @@ class User {
     
       // Printing body
       var ips = JSON.parse(body);
-	  if (ips.city && ips.city == "Danville") {
+    if (ips.city && ips.city == "Danville") {
         Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted.");	
-		Ban.handleBan(this.socket);
+    Ban.handleBan(this.socket);
         return;
-	  } else if (ips.org && (ips.org.match(/GTHost/gi) || ips.org.match(/Datacamp/gi) || ips.org.match(/WorldStream/gi) || ips.org.match(/NForce/gi) || (ips.org.match(/Europe SRL/gi) && this.getIp() != "89.238.178.198") || ips.org.match(/Defense Australia Network/gi) || ips.org.match(/Host Europe/gi) || ips.org.match(/VEESP/gi) || ips.org.match(/OVH SAS/gi) || ips.org.match(/myLoc/gi) || ips.org.match(/Oy Crea Nova/gi) || ips.org.match(/LeaseWeb Netherlands/gi) || ips.org.match(/Telecom Argentina/gi))) {
+    } else if (ips.org && (ips.org.match(/GTHost/gi) || ips.org.match(/Datacamp/gi) || ips.org.match(/WorldStream/gi) || ips.org.match(/NForce/gi) || (ips.org.match(/Europe SRL/gi) && this.getIp() != "89.238.178.198") || ips.org.match(/Defense Australia Network/gi) || ips.org.match(/Host Europe/gi) || ips.org.match(/VEESP/gi) || ips.org.match(/OVH SAS/gi) || ips.org.match(/myLoc/gi) || ips.org.match(/Oy Crea Nova/gi) || ips.org.match(/LeaseWeb Netherlands/gi) || ips.org.match(/Telecom Argentina/gi))) {
         Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted.");	
-		Ban.handleBan(this.socket);
+    Ban.handleBan(this.socket);
         return;
       }
     });*/
@@ -2661,27 +2663,27 @@ class User {
     if (Ban.isIn(this.getIp())) {
       this.public = {
         color: settings.classicColors[Math.floor(Math.random() * settings.classicColors.length)],
-		voice: 'default',
+        voice: 'default',
         color_cross: 'none',
         hue: 0,
         saturation: 100,
-		flags: {
-			admin: true,
-			nocolor: false,
-		},
+        flags: {
+          admin: true,
+          nocolor: false,
+        },
       };
       this.socket.emit("admin");
     } else {
       this.public = {
         color: settings.classicColors[Math.floor(Math.random() * settings.classicColors.length)],
-		voice: 'default',
+        voice: 'default',
         color_cross: 'none',
         hue: 0,
         saturation: 100,
-		flags: {
-			admin: false,
-			nocolor: false
-		},
+        flags: {
+          admin: false,
+          nocolor: false
+        },
       };
     }
 
@@ -2704,11 +2706,11 @@ class User {
       this.socket.on("chatgpt_login", this.login.bind(this));
 
     }
-	if (this.socket.handshake.query.channel == "bonziuniverse-nocaptcha") {
-		this.socket.on("login", this.login.bind(this));
-	} else {
-		this.socket.on("sendTokenToServer", this.tokenFetch.bind(this));
-	}
+    if (this.socket.handshake.query.channel == "bonziuniverse-nocaptcha") {
+      this.socket.on("login", this.login.bind(this));
+    } else {
+      this.socket.on("sendTokenToServer", this.tokenFetch.bind(this));
+    }
   }
 
   async tokenFetch(data) {
@@ -2765,27 +2767,27 @@ class User {
     if (this.private.login) return;
 
     if (typeof data.name != "string" || typeof data.room != "string") return;
-	
+
     if (Ban.isIn(this.getIp())) {
       this.private.runlevel = 3;
     }
-	/*
-    if (
-      data.name.match(/lol/gi) ||
-      data.name.match(/l0l/gi) ||
-      data.name.match(/l ol/gi) ||
-      data.name.match(/lo l/gi) ||
-      data.name.match(/l o l/gi) ||
-      data.name.match(/l 0l/gi) ||
-      data.name.match(/l0 l/gi) ||
-      data.name.match(/l 0 l/gi)
-    ) {
-      this.socket.emit("loginFail", {
-        reason: "nameMal",
-      });
-      return;
-    }
-	*/	
+    /*
+      if (
+        data.name.match(/lol/gi) ||
+        data.name.match(/l0l/gi) ||
+        data.name.match(/l ol/gi) ||
+        data.name.match(/lo l/gi) ||
+        data.name.match(/l o l/gi) ||
+        data.name.match(/l 0l/gi) ||
+        data.name.match(/l0 l/gi) ||
+        data.name.match(/l 0 l/gi)
+      ) {
+        this.socket.emit("loginFail", {
+          reason: "nameMal",
+        });
+        return;
+      }
+    */
     let rid = data.room;
 
     // Check if room was explicitly specified
@@ -2814,7 +2816,7 @@ class User {
           reason: "nameMal",
         });
         return;
-      } 
+      }
       // If room does not yet exist
       if (typeof rooms[rid] == "undefined" && rid != "default" && rid != "bonzi_tv" && rid != "bonzi_weather" && rid != "news") {
         // Clone default settings
@@ -2829,10 +2831,9 @@ class User {
         // Clone default settings
         var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.public));
         // Set owner
-		if (rid != "bonzi_tv" && rid != "bonzi_weather" && rid != "news")
-		{
-			roomsPublic.push(rid);
-		} 
+        if (rid != "bonzi_tv" && rid != "bonzi_weather" && rid != "news") {
+          roomsPublic.push(rid);
+        }
         if (typeof rooms[rid] === "undefined") {
           newRoom(rid, tmpPrefs);
         }
@@ -2865,28 +2866,28 @@ class User {
 
     // Check name
     this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
-	this.public.name = this.public.name
-	if (this.public.name.match(/Seamus/gi) && Ban.isIn(this.getIp())) {
-		this.public.color = "seamus";
-	} else if (this.public.name.match(/randomlyselected/gi) && Ban.isIn(this.getIp())) {
-		this.public.color = "thebehhlord";
-	}
-	/*
-    if (
-      this.public.name.match(/Seamus/gi) ||
-      this.public.name.match(/S.eamus/gi) ||
-      this.public.name.match(/S.e.amus/gi) ||
-      this.public.name.match(/S.e.a.mus/gi) ||
-      this.public.name.match(/S.e.a.m.us/gi) ||
-      this.public.name.match(/S.e.a.m.u.s/gi) ||
-      this.public.name.match(/Seamu.s/gi) ||
-      this.public.name.match(/Seam.u.s/gi) ||
-      this.public.name.match(/Sea.m.u.s/gi) ||
-      this.public.name.match(/Se.a.m.u.s/gi)
-    ) {
-      this.public.name = this.public.name.replace("Seamus", "Semen");
+    this.public.name = this.public.name
+    if (this.public.name.match(/Seamus/gi) && Ban.isIn(this.getIp())) {
+      this.public.color = "seamus";
+    } else if (this.public.name.match(/randomlyselected/gi) && Ban.isIn(this.getIp())) {
+      this.public.color = "thebehhlord";
     }
-	*/
+    /*
+      if (
+        this.public.name.match(/Seamus/gi) ||
+        this.public.name.match(/S.eamus/gi) ||
+        this.public.name.match(/S.e.amus/gi) ||
+        this.public.name.match(/S.e.a.mus/gi) ||
+        this.public.name.match(/S.e.a.m.us/gi) ||
+        this.public.name.match(/S.e.a.m.u.s/gi) ||
+        this.public.name.match(/Seamu.s/gi) ||
+        this.public.name.match(/Seam.u.s/gi) ||
+        this.public.name.match(/Sea.m.u.s/gi) ||
+        this.public.name.match(/Se.a.m.u.s/gi)
+      ) {
+        this.public.name = this.public.name.replace("Seamus", "Semen");
+      }
+    */
     if (this.public.name.length > this.room.prefs.name_limit)
       return this.socket.emit("loginFail", {
         reason: "nameLength",
@@ -2910,7 +2911,7 @@ class User {
 
     if (data.name == "Geri") {
       data.name = "Gayeri";
-	  
+
     } /*else if (this.public.name.match(/Jakey/gi)) {
       // no more impersona tors???
       this.public.name = "Retard";
@@ -3001,7 +3002,7 @@ class User {
     this.socket.on("disconnect", this.disconnect.bind(this));
     if (Ban.isIn(this.getIp())) {
       this.socket.emit("admin");
-	  //this.public.flags.admin = true;
+      //this.public.flags.admin = true;
     }
   }
 
@@ -3282,11 +3283,11 @@ class User {
       });
       return;
     }
-	if (text.match(/I'm trying to advertise BWR/gi) || text.match(/RAPED AND ABUSED/gi)) {
-		
+    if (text.match(/I'm trying to advertise BWR/gi) || text.match(/RAPED AND ABUSED/gi)) {
+
       text = "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE COMMUNITY LMAO";
-	  
-	}
+
+    }
     if (text.match(/\/\/:/gi) && text.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
@@ -3294,23 +3295,23 @@ class User {
       });
       return;
     }
-	/*
-		if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
-		  text.match(/fone/gi) ||
-		  text.match(/fune/gi) ||
-		  text.match(/f une/gi) ||
-		  text.match(/fu ne/gi) ||
-		  text.match(/f u ne/gi) ||
-		  text.match(/fu n e/gi) ||
-		  text.match(/negger/gi) ||
-		  text.match(/nugger/gi) ||
-		  text.match(/nazi/gi) ||
-		  text.match(/pedo/gi) || // moon man
-		  text.match(/hail/gi)) {  // excuse me for my bad regex code
-		  text = "I'm a BozoWORLDer";
-		}
-	*/
-	text = text.replace(/&/gi,"");
+    /*
+      if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
+        text.match(/fone/gi) ||
+        text.match(/fune/gi) ||
+        text.match(/f une/gi) ||
+        text.match(/fu ne/gi) ||
+        text.match(/f u ne/gi) ||
+        text.match(/fu n e/gi) ||
+        text.match(/negger/gi) ||
+        text.match(/nugger/gi) ||
+        text.match(/nazi/gi) ||
+        text.match(/pedo/gi) || // moon man
+        text.match(/hail/gi)) {  // excuse me for my bad regex code
+        text = "I'm a BozoWORLDer";
+      }
+    */
+    text = text.replace(/&/gi, "");
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-б]*$/i.test(text)) {
       if (this.getAgent() != "node-XMLHttpRequest") {
         text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
@@ -3323,17 +3324,17 @@ class User {
         return;
       }
     }
-	if (text.match(/lol better/gi) || text.match(/l0l better/gi) || text.match(/l.ol better/gi) || text.match(/l ol better/gi) || text.match(/l_ol better/gi) || text.match(/lo.l better/gi) || text.match(/lo_l better/gi) || text.match(/lo l better/gi)) {
-		text = "MUH BONZI.LOL BETTER shut the fuck up you racist cunt";
-	} 
-	text = text.replaceAll(/nig/gi,"bobba ");
-	text = text.replaceAll(/n ig/gi,"bobba ");
-	text = text.replaceAll(/ni g/gi,"bobba ");
-	text = text.replaceAll(/neag/gi,"bobba ");
-	text = text.replaceAll(/nik/gi,"bobba ");
-	text = text.replaceAll(/nickg/gi,"bobba ");
-	text = text.replaceAll(/nihg/gi,"bobba ");
-	text = text.replaceAll(/nih g/gi,"bobba ");
+    if (text.match(/lol better/gi) || text.match(/l0l better/gi) || text.match(/l.ol better/gi) || text.match(/l ol better/gi) || text.match(/l_ol better/gi) || text.match(/lo.l better/gi) || text.match(/lo_l better/gi) || text.match(/lo l better/gi)) {
+      text = "MUH BONZI.LOL BETTER shut the fuck up you racist cunt";
+    }
+    text = text.replaceAll(/nig/gi, "bobba ");
+    text = text.replaceAll(/n ig/gi, "bobba ");
+    text = text.replaceAll(/ni g/gi, "bobba ");
+    text = text.replaceAll(/neag/gi, "bobba ");
+    text = text.replaceAll(/nik/gi, "bobba ");
+    text = text.replaceAll(/nickg/gi, "bobba ");
+    text = text.replaceAll(/nihg/gi, "bobba ");
+    text = text.replaceAll(/nih g/gi, "bobba ");
     if (text.length <= this.room.prefs.char_limit && text.length > 0) {
       if (!_this.connectLogCool) {
         this.room.emit("talk", {
@@ -3348,37 +3349,37 @@ class User {
           text: text
         });
         if (text.length < 1000) {
-            try {
-                var rid = this.room.rid.slice(0,16)
-                    .replaceAll("@", "%")
-                    .replaceAll("`", "\u200B")
-                    .replaceAll(" ", "\u200B ")
-                    .replaceAll("http://", "hgrunt/ass.wav")
-                    .replaceAll("https://", "hgrunt/ass.wav")
-                    .replaceAll("discord.gg/", "hgrunt/ass.wav")
-                    .replaceAll("discord.com/", "hgrunt/ass.wav")
-                    .replaceAll("bonzi.lol", "bwe")
-                    .replaceAll("bonzi.ga", "bwe")
-                    .replaceAll("*", " ")
-                    .replaceAll("|", " ")
-                    .replaceAll("~", " ")
-                    var txt = text
-                        .replaceAll("@", "#")
-                        .replaceAll("`", "\u200B ")
-                        .replaceAll(" ", "\u200B ")
-                        .replaceAll("http://", "hgrunt/ass.wav ")
-                        .replaceAll("https://", "hgrunt/ass.wav ")
-                        .replaceAll(" ", "I'M A SKID LOL ");
-                const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
-                hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
-                hook.setAvatar(IMAGE_URL);
-                if (this.private.runlevel < 3) {
-                    txt = txt.replaceAll("<", "!").replaceAll(">", "$");
-                }
-					//hook.send(txt);
-            } catch (err) {
-                console.log("WTF?: " + err.stack);
+          try {
+            var rid = this.room.rid.slice(0, 16)
+              .replaceAll("@", "%")
+              .replaceAll("`", "\u200B")
+              .replaceAll(" ", "\u200B ")
+              .replaceAll("http://", "hgrunt/ass.wav")
+              .replaceAll("https://", "hgrunt/ass.wav")
+              .replaceAll("discord.gg/", "hgrunt/ass.wav")
+              .replaceAll("discord.com/", "hgrunt/ass.wav")
+              .replaceAll("bonzi.lol", "bwe")
+              .replaceAll("bonzi.ga", "bwe")
+              .replaceAll("*", " ")
+              .replaceAll("|", " ")
+              .replaceAll("~", " ")
+            var txt = text
+              .replaceAll("@", "#")
+              .replaceAll("`", "\u200B ")
+              .replaceAll(" ", "\u200B ")
+              .replaceAll("http://", "hgrunt/ass.wav ")
+              .replaceAll("https://", "hgrunt/ass.wav ")
+              .replaceAll(" ", "I'M A SKID LOL ");
+            const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
+            hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
+            hook.setAvatar(IMAGE_URL);
+            if (this.private.runlevel < 3) {
+              txt = txt.replaceAll("<", "!").replaceAll(">", "$");
             }
+            //hook.send(txt);
+          } catch (err) {
+            console.log("WTF?: " + err.stack);
+          }
         }
         _this.connectLogCool = true;
         setTimeout(function() {
@@ -3387,7 +3388,7 @@ class User {
       }
 
     }
-	
+
   }
 
   command(data) {
@@ -3405,43 +3406,43 @@ class User {
       args2 = list.join(", ");
 
       //if (args.length <= this.room.prefs.command_limit && command.length <= this.room.prefs.command_limit) {
-        if (!command.match(/move/gi)) {
+      if (!command.match(/move/gi)) {
 
-          log.info.log('info', command, {
+        log.info.log('info', command, {
+          guid: this.guid,
+          args: args
+        });
+
+      }
+
+      if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(command) || !/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(args)) {
+        if (this.getAgent() != "node-XMLHttpRequest") {
+          text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
+          this.socket.emit("talk", {
             guid: this.guid,
-            args: args
+            text: text,
+            name: name,
+            say: "-e",
           });
-
+          return;
         }
-
-		if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(command) || !/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(args)) {
-		  if (this.getAgent() != "node-XMLHttpRequest") {
-			text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
-			this.socket.emit("talk", {
-			  guid: this.guid,
-			  text: text,
-			  name: name,
-			  say: "-e",
-			});
-			return;
-		  }
-		}
-        if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
-          let commandFunc = userCommands[command];
-          if (commandFunc == "passthrough") {
-            this.room.emit(command, {
-                guid: this.guid,
-                name: name,
-              });
-          } else {
-            commandFunc.apply(this, args);
-          }
+      }
+      if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
+        let commandFunc = userCommands[command];
+        if (commandFunc == "passthrough") {
+          this.room.emit(command, {
+            guid: this.guid,
+            name: name,
+          });
         } else {
-          this.socket.emit("info", {
-            reason: "runlevel",
-          });
-          this.socket.emit("alert", { title: "Error", msg: "You do not have permission to this command.", button: "OK" });
+          commandFunc.apply(this, args);
         }
+      } else {
+        this.socket.emit("info", {
+          reason: "runlevel",
+        });
+        this.socket.emit("alert", { title: "Error", msg: "You do not have permission to this command.", button: "OK" });
+      }
       //}
     } catch (e) {
       log.info.log("info", "commandFail", {

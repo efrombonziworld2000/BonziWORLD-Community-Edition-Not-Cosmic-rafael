@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 
 // Load settings
 try {
-  stats = fs.lstatSync('./json/settings.json'); 
+  stats = fs.lstatSync('./json/settings.json');
 } catch (e) {
   // If settings do not yet exist
   if (e.code == "ENOENT") {
@@ -53,7 +53,7 @@ app.use('/robots.txt', function(req, res, next) {
 });
 // Init socket.io
 var io = require('socket.io')(server, {
-    allowEIO3: true
+  allowEIO3: true
 });
 var port = process.env.PORT || settings.port;
 exports.io = io;
@@ -78,6 +78,24 @@ server.listen(port, function() {
     "----------------------\n",
     "Server listening at port " + port
   );
+});
+
+const { RateLimiterMemory } = require('rate-limiter-flexible');
+
+const rateLimiter = new RateLimiterMemory({
+  points: 5, // 5 points
+  duration: 1 // per second
+});
+
+
+app.use((req, res, next) => {
+  rateLimiter.consume(req.ip)
+    .then(() => {
+      next();
+    })
+    .catch(() => {
+      res.status(429).send('Too Many Requests');
+    });
 });
 app.use(express.static(__dirname + '/public', {
   extensions: ['html']

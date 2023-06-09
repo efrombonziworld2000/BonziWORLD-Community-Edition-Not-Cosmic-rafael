@@ -1,6 +1,6 @@
 ## BonziWORLD Community Edition / BonziWORLD Revived Classic
 
-BonziWORLD Revived Classic (or just BonziWORLD) is a re-release of an older version of a fork of BonziWORLD Revived by mrnotesonic (RIP), originally released in 2019.
+BonziWORLD Revived Classic (or just BonziWORLD) is a re-release of an older version of a fork of BonziWORLD Revived by mrnotesonic (Rest in Peace), originally released in 2019.
 
 ## Where can I visit it?
 
