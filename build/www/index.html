@@ -33,20 +33,6 @@
     
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
-    		setInterval(function(){
-				if (window.location.hostname != "localhost") {
-					if (devtools.isOpen && !window.skidDetected) {
-						window.location.href = "https://bonziworld.co/abw/" 
-						window.skidDetected = true;
-					} 
-				}
-				if (window.location.hostname != "localhost" && window.location.hostname != "bonziworld.co" && window.location.hostname != "192.168.40.47") {
-					if (!window.redirecting) {
-						window.location.href = "https://bonziworld.co/" 
-						window.redirecting = true;
-					} 
-				}
-			 },100)
 			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me. - Techy");
     	</script>
 <script>
