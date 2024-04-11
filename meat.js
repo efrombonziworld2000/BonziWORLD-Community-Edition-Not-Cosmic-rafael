@@ -2156,7 +2156,7 @@ let userCommands = {
       "CAN U PLZ UNBAN ME PLZ PLZ PLZ PLZ PLZ PLZ PLZ PLZ",
       "I made The Rebellion of SeamusMario55&trade;",
       "I like Unbojih",
-      "ItzCrazyScout, No! More like.... ekfheiophjeodxenwobifuodhndoxnwsiohbdeiowdhn2werifhwefief! He banned euhdeioqwdheiwohjixzojqsioh r23oipwshnwq! End of rant.",
+      "ItzCrazyScout, No! More like.... ekfheiophjeodxenwobifuodhndoxnwsiohbdeiowdhn2werifhwefief! He banned euhdeioqwdheiwohjixzojqsioh r23oipwshnwq! End of rant.", //deadname detected. change later?
       "i play left 4 dead games 24/7",
       "i am so cool. i shit on people, add reactions  that make fun of users on discord, and abuse my admin powers. i am really so cool.",
       "This product will not operate when connected to a device which makes unauthorized copies. Please refer to your instruction booklet for more information.",
@@ -2186,6 +2186,40 @@ let userCommands = {
       "I FAP TO FEMMEPYRO NO JOKE",
       "i am not kid",
       "i am a gamer girl yes not man no im not man i am gamer girl so give me money and ill giv you my adress <3",
+            "i used grounded threats and now i got hate",
+            "i post pbs kids and now people are calling me a pbskidsfag",
+            "i post pbs and now people are calling me a pbsfag",
+            "i post fnf and now people are calling me a fnffag",
+            "Oh my gosh! PBS Kids new logo came on July 19th!",
+            "i will flood the server but people still think that i will not flood, the flooder haters are psychopaths, a skiddie, psychology and mentallity",
+            "i used inspect element and now i got hate",
+            "hi i am vacbedlover want to show my sexual fetish. I just kept evading my ban on collabvm to act like a forkie.",
+            "i watch the potty song and now people are calling me a pottyfag",
+            "bonziworld reacts to... zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+            "i am danieltr52 the clown and i have inflation fetish",
+            "i watch nature on pbs",
+            "i post thomas theme song and now people are calling me a thomasfag",
+            "i pee my pants",
+            "Wow! TVOKids is awesome- No! Its not awesome, you idiotic Baby Shark fan!",
+            "Wow! Baby Shark is awesome- No! Its not awesome, you idiotic TVOKids fan!",
+            "Wow! Hogi is awesome- No! Its not awesome, you idiotic Hogi fan!",
+            "Wow! PinkFong is awesome- No! Its not awesome, you idiotic PinkFong fan!",
+            "Wow! PBS Kids is awesome- No! Its not awesome, you idiotic PBS Kids fan!",
+            "i watch grounded videos and now people are calling me a gotard",
+            "Hi i am DanielTR52 and i have inflation fetish my friends please hate on seamus from making bad videos out of me",
+            "Excuse me, CUT! We made another color blooper! glass breaking sound effect WAAAAAAAAAAAA! inhale WAAAAAAAAAAAA! Well that was uncalled for. It was! Anyways, you guys are in the colors of the AidenTV logo. Looks down BOING! Oh, oops. It's okay, swap the colors back to normal and then we'll do Take 48! Snap",
+            "DOGGIS!",
+            "i post pinkfong and now people are calling me a pinkfongfag",
+            "i post hogi and now people are calling me a hogifag",
+            "i post baby shark and now people are calling me a babysharkfag",
+            "my favorite flash nickelodeon clickamajig is Dress Up Sunny Funny",
+            "i snort dill pickle popcorn seasoning",
+            "i listen to planet custard's greated song, the potty song and now i got hate",
+            "i post i got banned on bonziworld and now i got hate",
+            "i post babytv and now people are calling me a babytvfag",
+            "i post sf08 news and now i got hate",
+            "i listen to spongebob theme song and now i got hate",
+	    "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little 'clever' comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo."
     ];
     this.room.emit("talk", {
       text: wtf[Math.floor(Math.random() * wtf.length)],
@@ -2245,11 +2279,29 @@ let userCommands = {
       this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
     }
   },
+  pope5: function() {
+    if (this.private.runlevel === 3 || !this.room.isPublic) {
+      // removing this will cause chaos, shut up 2020 me
+      this.public.color = "pope_new";
+      this.room.updateUser(this);
+    } else {
+      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
+    }
+  },
 
   god: function() {
     if (this.private.runlevel === 3 || !this.room.isPublic) {
       // removing this will cause chaos, shut up 2020 me
       this.public.color = "god";
+      this.room.updateUser(this);
+    } else {
+      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
+    }
+  },
+    fune: function() {
+    if (this.private.runlevel === 3 || !this.room.isPublic) {
+      // removing this will cause chaos, shut up 2020 me, fune is a warshit owner, i like him why???
+      this.public.color = "fune";
       this.room.updateUser(this);
     } else {
       this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
@@ -2290,7 +2342,7 @@ let userCommands = {
     });
   },
   seeupdates: function() {
-    this.socket.emit("alert", { title: "See Updates", msg: "New minor update - /manchild is deprecated because it is old, and the webp file doesnt work anymore. -itzdonutscout", button: "OK" });
+    this.socket.emit("alert", { title: "See Updates", msg: "Initial Release.", button: "OK" });
   },
   beggar: function() {
     this.room.emit("beggar", {
@@ -2953,13 +3005,92 @@ class User {
       });
       return;
     }
+    if (data.name.includes("fl00d")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("ra1d")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
     if (data.name.includes("PinkFong")) {
       this.socket.emit("loginFail", {
         reason: "nameMal",
       });
       return;
     }
+    if (data.name.includes("P i n k F o n g")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("PinkF0ng")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("P1nkF0ng")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("P1nkFong")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("PinkFon g")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("PinkF o n g")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("P i n kFong")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("PinkF o ng")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("P inkFong")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("P 1 n k F 0 n g")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
     if (data.name.includes("Hogi")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    
+    if (data.name.includes("H o g i")) {
       this.socket.emit("loginFail", {
         reason: "nameMal",
       });
