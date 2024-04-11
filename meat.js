@@ -3312,21 +3312,10 @@ class User {
       }
     */
     text = text.replace(/&/gi, "");
-    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-б]*$/i.test(text)) {
-      if (this.getAgent() != "node-XMLHttpRequest") {
-        text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
-        this.socket.emit("talk", {
-          guid: this.guid,
-          text: text,
-          name: name,
-          say: "-e",
-        });
-        return;
-      }
-    }
     if (text.match(/lol better/gi) || text.match(/l0l better/gi) || text.match(/l.ol better/gi) || text.match(/l ol better/gi) || text.match(/l_ol better/gi) || text.match(/lo.l better/gi) || text.match(/lo_l better/gi) || text.match(/lo l better/gi)) {
-      text = "MUH BONZI.LOL BETTER shut the fuck up you racist cunt";
+      text = "MUH BANZIWARLD.AERG BETTER shut the fuck up you racist cunt";
     }
+    /*
     text = text.replaceAll(/nig/gi, "bobba ");
     text = text.replaceAll(/n ig/gi, "bobba ");
     text = text.replaceAll(/ni g/gi, "bobba ");
@@ -3335,6 +3324,7 @@ class User {
     text = text.replaceAll(/nickg/gi, "bobba ");
     text = text.replaceAll(/nihg/gi, "bobba ");
     text = text.replaceAll(/nih g/gi, "bobba ");
+    */
     if (text.length <= this.room.prefs.char_limit && text.length > 0) {
       if (!_this.connectLogCool) {
         this.room.emit("talk", {
@@ -3358,8 +3348,10 @@ class User {
               .replaceAll("https://", "hgrunt/ass.wav")
               .replaceAll("discord.gg/", "hgrunt/ass.wav")
               .replaceAll("discord.com/", "hgrunt/ass.wav")
-              .replaceAll("bonzi.lol", "bwe")
-              .replaceAll("bonzi.ga", "bwe")
+              .replaceAll("bonzi.lol", "bwce")
+              .replaceAll("bonzi.ga", "bwce")
+              .replaceAll("bonziworld.org", "bwce")
+              .replaceAll("bonziworld.lol", "bwce")
               .replaceAll("*", " ")
               .replaceAll("|", " ")
               .replaceAll("~", " ")
@@ -3415,18 +3407,6 @@ class User {
 
       }
 
-      if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(command) || !/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(args)) {
-        if (this.getAgent() != "node-XMLHttpRequest") {
-          text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
-          this.socket.emit("talk", {
-            guid: this.guid,
-            text: text,
-            name: name,
-            say: "-e",
-          });
-          return;
-        }
-      }
       if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
         let commandFunc = userCommands[command];
         if (commandFunc == "passthrough") {
