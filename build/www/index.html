@@ -1,44 +1,52 @@
+/*!
+devtools-detect
+https://github.com/sindresorhus/devtools-detect
+By Sindre Sorhus
+MIT License
+*/
 
+const devtools = {
+	isOpen: false,
+	orientation: undefined,
+};
 
-    <head>
-<title>BonziWORLD Community Edition</title>
-<meta charset="utf-8" />
-<meta content />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-<meta name="mobile-web-app-capable" content="yes" />
-<link rel="stylesheet" type="text/css" href="./css/style.min.css" />
-<link rel="stylesheet" type="text/css" href="./css/clippy.css" media="all" />
-<link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
-<link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32" />
-<link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16" />
-<link rel="manifest" href="./favicons/manifest.json" />
-<link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#5bbad5" />
-<link rel="shortcut icon" href="./favicons/favicon.ico" />
-<meta name="msapplication-config" content="./favicons/browserconfig.xml" />
-<meta name="theme-color" content="#8b5adc" />
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="BonziWORLD">
-<meta property="og:keywords" content="BonziWORLD, bonziworld, bwr, BWR, BonziWorld Revived, Bonziworld">
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:site" content="@BonziWRevived">
-<meta property="twitter:site:id" content="@BonziWRevived"> <meta property="twitter:creator" content="@BonziWRevived">
-<meta property="twitter:creator:id" content="@BonziWRevived">
-<meta property="og:locale" content="en-US">
-<meta content="https://bonziworld.co" property="og:url" />
-<meta content="https://bonziworld.co/favicons/thumbnail.png" property="og:image" />
-<meta data-react-helmet="true" property="og:title" content="BonziWORLD"><meta data-react-helmet="true" property="og:description" content="Welcome to BonziWORLD! The official revival of BonziWORLD.com! Join with other bonzibuddies to chat, record, watch videos and many other fun stuff. We are true official revival site and we don't have offensive content unlike the other one. We are 99.99% (100%) more peaceful than bonzi.lol! Join now and play with other BonziBUDDIES!">
-<meta data-react-helmet="true" name="description" content="Welcome to BonziWORLD! The official revival of BonziWORLD.com! Join with other bonzibuddies to chat, record, watch videos and many other fun stuff. We are true official revival site and we don't have offensive content unlike the other one. We are 99.99% (100%) more peaceful than bonzi.lol! Join now and play with other BonziBUDDIES!">
-<script type="module">
-    		import devtools from './index.js';
-    
-			const queryString = window.location.search;
-			const urlParams = new URLSearchParams(queryString);
-			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me. - Techy");
-    	</script>
-<script>
-			window.onbeforeunload = () => {
-			  return true;
-			};
-		</script>
-</head>
-<iframe src="./chat" width="100%" height="100%"></iframe>
+const threshold = 170;
+
+const emitEvent = (isOpen, orientation) => {
+	globalThis.dispatchEvent(new globalThis.CustomEvent('devtoolschange', {
+		detail: {
+			isOpen,
+			orientation,
+		},
+	}));
+};
+
+const main = ({emitEvents = true} = {}) => {
+	const widthThreshold = globalThis.outerWidth - globalThis.innerWidth > threshold;
+	const heightThreshold = globalThis.outerHeight - globalThis.innerHeight > threshold;
+	const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+	if (
+		!(heightThreshold && widthThreshold)
+		&& ((globalThis.Firebug && globalThis.Firebug.chrome && globalThis.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)
+	) {
+		if ((!devtools.isOpen || devtools.orientation !== orientation) && emitEvents) {
+			emitEvent(true, orientation);
+		}
+
+		devtools.isOpen = true;
+		devtools.orientation = orientation;
+	} else {
+		if (devtools.isOpen && emitEvents) {
+			emitEvent(false, undefined);
+		}
+
+		devtools.isOpen = false;
+		devtools.orientation = undefined;
+	}
+};
+
+main({emitEvents: false});
+setInterval(main, 500);
+
+export default devtools;
