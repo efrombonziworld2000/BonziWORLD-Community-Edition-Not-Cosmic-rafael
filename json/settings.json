@@ -50,6 +50,8 @@
 				"pope3": 3,
 				"pope4": 3,
 				"pope5": 3,
+				"god": 3,
+				"god2": 3,
 				"fune": 3,
 				"ww3": 3,
 				"broadcast": 3,
@@ -135,6 +137,8 @@
 				"pope3": 0,
 				"pope4": 0,
 				"pope5": 0,
+				"god": 3,
+				"god2": 3,
 				"fune": 0,
 				"ww3": 3,
 				"move": 0
