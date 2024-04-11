@@ -1275,7 +1275,7 @@ let userCommands = {
           target.disconnect();
         }
       } else {
-        this.socket.emit("alert", "Imagine kicking a user when left. You are grounded");
+        this.socket.emit("alert", "Imagine kicking a user when left.");
       }
     } else {
       if (this.private.runlevel < 3) {
@@ -2953,6 +2953,45 @@ class User {
       });
       return;
     }
+    if (data.name.includes("PinkFong")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("Hogi")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    
+    if (data.name.includes("Poki")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    
+    if (data.name.includes("Bebba")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("Bebefinn")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    if (data.name.includes("Baby Shark")) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal",
+      });
+      return;
+    }
+    //No PinkFong allowed
     // Join room
     this.room.join(this);
 
@@ -3310,8 +3349,8 @@ class User {
         text.match(/hail/gi)) {  // excuse me for my bad regex code
         text = "I'm a BozoWORLDer";
       }
-    */
     text = text.replace(/&/gi, "");
+    */
     if (text.match(/lol better/gi) || text.match(/l0l better/gi) || text.match(/l.ol better/gi) || text.match(/l ol better/gi) || text.match(/l_ol better/gi) || text.match(/lo.l better/gi) || text.match(/lo_l better/gi) || text.match(/lo l better/gi)) {
       text = "MUH BANZIWARLD.AERG BETTER shut the fuck up you racist cunt";
     }
@@ -3341,6 +3380,7 @@ class User {
         if (text.length < 1000) {
           try {
             var rid = this.room.rid.slice(0, 16)
+              /*
               .replaceAll("@", "%")
               .replaceAll("`", "\u200B")
               .replaceAll(" ", "\u200B ")
@@ -3355,12 +3395,15 @@ class User {
               .replaceAll("*", " ")
               .replaceAll("|", " ")
               .replaceAll("~", " ")
+              */
             var txt = text
+              /*
               .replaceAll("@", "#")
               .replaceAll("`", "\u200B ")
               .replaceAll(" ", "\u200B ")
               .replaceAll("http://", "hgrunt/ass.wav ")
               .replaceAll("https://", "hgrunt/ass.wav ")
+              */
               .replaceAll(" ", "I'M A SKID LOL ");
             const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
             hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
@@ -3376,7 +3419,7 @@ class User {
         _this.connectLogCool = true;
         setTimeout(function() {
           _this.connectLogCool = false;
-        }, 1500);
+        }, 0);
       }
 
     }
