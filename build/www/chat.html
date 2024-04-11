@@ -63,21 +63,7 @@
     
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
-    		setInterval(function(){
-				if (window.location.hostname != "localhost") {
-					if (devtools.isOpen && !window.skidDetected) {
-						window.location.href = "https://bonziworld.co/abw/" 
-						window.skidDetected = true;
-					} 
-				}
-				if (window.location.hostname != "localhost" && window.location.hostname != "bonziworld.co" && window.location.hostname != "192.168.40.47") {
-					if (!window.redirecting) {
-						window.location.href = "https://bonziworld.co/" 
-						window.redirecting = true;
-					} 
-				}
-			 },100)
-			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me.");
+			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me. - Techy");
     	</script>
 <script src="./js/lib/clippy.min.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
@@ -353,7 +339,7 @@ Help us get more members: Spread the link on YouTube, Discord and other Social M
 <option value="poland"></option>
 <option value="pope"></option>
 </datalist>
-<button id="login_go_button" onclick="warningScreen()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+<button id="login_go_button" onclick="login();" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
 <div id="login_go"></div>
 </button>
 <br/>
