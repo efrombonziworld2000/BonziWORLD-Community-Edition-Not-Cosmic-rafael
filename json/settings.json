@@ -52,7 +52,7 @@
 				"pope4": 3,
 				"ww3": 3,
 				"broadcast": 3,
-				"crosscolor": 0,
+				"crosscolor": 3,
 				"move": 0
 			},
 			"room_max": 1000000,
