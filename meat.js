@@ -2298,6 +2298,15 @@ let userCommands = {
       this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
     }
   },
+  god2: function() {
+    if (this.private.runlevel === 3 || !this.room.isPublic) {
+      // removing this will cause chaos, shut up 2020 me, credit to cosmic
+      this.public.color = "god_modern";
+      this.room.updateUser(this);
+    } else {
+      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
+    }
+  },
     fune: function() {
     if (this.private.runlevel === 3 || !this.room.isPublic) {
       // removing this will cause chaos, shut up 2020 me, fune is a warshit owner, i like him why???
