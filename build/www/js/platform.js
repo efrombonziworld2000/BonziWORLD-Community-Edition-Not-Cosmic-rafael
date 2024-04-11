@@ -44,6 +44,14 @@ $(function() {
 	if (!supported) {
 		$("#page_unsupp").show();
 	}
+
+	if (isChromeBrowser && isDesktop) {
+	 	$(".app_showcase").append(
+	 		'<a class="app_chrome" href="' + urlChrome + '">' +
+	 			'<img src="./img/app/chrome.png" alt="Chrome Extension" />' +
+	 		'</a>'
+	 	);
+	}
 /*
 	if (!isiOS) {
 		$(".app_showcase").append(
@@ -53,6 +61,13 @@ $(function() {
 		);
 	}
 */
+	if (!isiOS) {
+		$(".app_showcase").append(
+			'<a class="app_android" href="' + urlAmazonStore + '">' +
+				'<img src="./img/app/amazon-appstore-badge-english-black.png" alt="Get it on Amazon Appstore." width=211/>' +
+			'</a>'
+		);
+	}
 	if (!isDesktop) {
 		$(".app_showcase").append(
 			'<a class="app_chrome">' +
