@@ -9,46 +9,6 @@
         <script>
           const queryString = window.location.search;
           const urlParams = new URLSearchParams(queryString);
-          
-          const devtest = window.location.hostname == "localhost"
-          if (!devtest) {
-            document.onkeydown = function(e) {
-              if(event.keyCode == 123) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                socket.disconnect()
-                document.getElementById('page_consoledisabled').style.display = "block";
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'F'.charCodeAt(0)) {
-                socket.disconnect()
-                document.getElementById('page_secretsite').style.display = "block";
-                setTimeout(function(){window.location.href = "http://78.63.40.199:2096";}, 3000)
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                 return false;
-              }
-            }
-            
-            setInterval(function(){
-
-              debugger;
-              //console.profile();
-              //console.profileEnd();
-              //if (console.clear) {
-                //console.clear();
-              //}
-              
-            },150)
-          }
           function onSubmit() {
             grecaptcha.render(document.getElementById('recaptcha_verify'), {
               'sitekey' : '6LdJg1UkAAAAADPB7eAzWRGEi8GArEkiCQbSX1PM',
@@ -95,6 +55,7 @@
         <script src="./js/lib/autostartjs"></script>
         <script src="./js/lib/espeak/espeak.js"></script>
         <script src="./js/lib/jquery.contextMenu.min.js"></script>
+	    <!--
         <script type="module">
     		import devtools from './index.js';
     
@@ -109,6 +70,7 @@
 			 },100)
 			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me. - Techy");
     	</script>
+	    -->
         <script src="./cordova.js"></script>
         <script src="./js/platform.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/platform.css" />
@@ -251,7 +213,7 @@
 			<div id="mainlog" style="display:none;">
 			<div id="title">Bonzi LOG ™ <i onclick="$('#logshow').show();$('#mainlog').hide()" class="fa fa-close" aria-hidden="true"></i></div>
 			<div id="logcontent">
-				<p>Welcome to BONZIWORLD.CO<br><small>skidded (copy and pasted) by seamoose</small></p>
+				<p>Welcome to BonziWORLD Community Editon&reg;</p>
 			</div>
 			</div>
 			<button id="logshow" onclick="showtoggle()"><i class="fa fa-bars" aria-hidden="true"></i></button>
@@ -420,6 +382,7 @@
                 <a href="#" onclick="window.location.reload()">Reload?</a>
             </div>
         </div>
+	    <!--
       <div id="page_consoledisabled" class="page" style="display: none;">
             <div id="consoledisabled_cont" class="message_cont">
                 <img src="./img/ban/logo.png" />
@@ -432,6 +395,7 @@
                 <a href="#" onclick="window.location.reload()">Reload?</a>
             </div>
         </div>
+	    -->
       <div id="page_secretsite" class="page" style="display: none;">
             <div id="secretsite_cont" class="message_cont">
                 <img src="./img/ban/logo.png" />
@@ -632,7 +596,7 @@
               if (url) {
                 safeMode = true;
                 socket = io(url);
-                if(url.includes('bonzi.lol')){alert("This server is too unsafe to connect. It may be 'secure', but the admins can grab your IP by using their context menu. This will only occur if you are on their enemy list.\nPlease connect to something else.");socket.disconnect()}
+                if(url.includes('bonziworld.org')){alert("This server is too unsafe to connect. It may be 'secure', but the admins can grab your IP by using their context menu. This will only occur if you are on their enemy list.\nPlease connect to something else.");socket.disconnect()}
               }
               
             }
